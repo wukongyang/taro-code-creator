@@ -2,7 +2,7 @@
 
 ## Supporting platforms
 
-**weapp h5 tt rn**
+**weapp h5 tt swan alipay qq rn**
 
 ## Installing
 
