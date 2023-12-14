@@ -1,19 +1,20 @@
 import { ComponentType } from "react";
 
-import { QrCodeProps as CodeProps } from "./index.type";
+import { ScanCodeProps } from "./index.type";
+
 
 let implementation;
 if (process.env.TARO_ENV === "rn") {
   implementation = require("./lib/rn");
-}if (process.env.TARO_ENV === "h5") {
-    implementation = require("./lib/h5");
-  } else {
+} else if (process.env.TARO_ENV === "h5") {
+  implementation = require("./lib/h5");
+} else {
   implementation = require("./lib/mp");
 }
 
-export interface QrCodeProps extends CodeProps {}
+export interface ScanCodeProp extends ScanCodeProps {}
 
-const QrCode: ComponentType<QrCodeProps> =
+const QrCode: ComponentType<ScanCodeProps> =
   implementation.default || implementation;
 
 export default QrCode;

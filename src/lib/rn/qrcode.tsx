@@ -5,15 +5,17 @@
  */
 
 import React, { useEffect, useRef } from "react";
-import QrCodeCom from "react-native-qrcode-svg";
 import Taro from "@tarojs/taro";
-import { QrCodeProps } from "../index.type";
+
+import QrCodeCom from "../../utils/rn_qrcode/index.js";
+
+import { ScanCodeProps } from "../../index.type";
 /**
  * @description 二维码组件
  * @example
  * <QrCode codeText={'test_text'} />
  */
-const QrCode: React.FC<QrCodeProps> = ({
+const QrCode: React.FC<ScanCodeProps> = ({
   size = 200,
   logo = "",
   logoSize = 60,

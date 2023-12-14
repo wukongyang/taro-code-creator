@@ -7,15 +7,15 @@
 import { Canvas } from "@tarojs/components";
 import React, { useEffect } from "react";
 import Taro from "@tarojs/taro";
-import { QrCodeProps } from "../index.type";
-import drawQrcode from "../utils/qrcode";
+import { ScanCodeProps } from "../../index.type";
+import drawQrcode from "../../utils/qrcode";
 
 /**
  * @description 二维码组件
  * @example
  * <QrCode codeText={'test_text'} />
  */
-const QrCode: React.FC<QrCodeProps> = ({
+const QrCode: React.FC<ScanCodeProps> = ({
   size = 200,
   logo = "",
   logoSize = 60,

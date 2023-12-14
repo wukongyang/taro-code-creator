@@ -9,14 +9,14 @@ import React, { useEffect } from "react";
 import Taro from "@tarojs/taro";
 import QRCode from "qrcodejs2";
 
-import { QrCodeProps } from "../index.type";
+import { ScanCodeProps } from "../../index.type";
 
 /**
  * @description 二维码组件
  * @example
  * <QrCode codeText={'test_text'} />
  */
-const QrCode: React.FC<QrCodeProps> = ({
+const QrCode: React.FC<ScanCodeProps> = ({
   size = 200,
   logo = "",
   logoSize = 60,
@@ -30,8 +30,6 @@ const QrCode: React.FC<QrCodeProps> = ({
   const sizeNumber = ratio * size;
   const logoSizeNumber = ratio * logoSize;
   useEffect(() => {
-    // const sizeNumber = parseFloat(Taro.pxTransform(size)) / 2;
-    // const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) / 2;
 
     new QRCode("qrcode", {
       text: codeText,

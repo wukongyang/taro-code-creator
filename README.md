@@ -1,4 +1,6 @@
-# taro-svga
+# taro-code-creator
+
+**Supports generating barcodes and QR codes**
 
 ## Supporting platforms
 
@@ -7,32 +9,13 @@
 ## Installing
 
 ```
-yarn add taro-svga
-```
-
-### Extra Installing For React Native
-
-> Based on [react-native-qrcode-svg](https://github.com/awesomejerry/react-native-qrcode-svg)
-
-android
-
-```
-react-native link react-native-qrcode-svg
-```
-
-OR
-auto link
-
-Go to your ios folder and run:
-
-```
-pod install
+yarn add taro-code-creator
 ```
 
 ## Basic Usage
 
 ```tsx
-import QrCode from "taro-qrcode";
+import QrCode from "taro-code-creator";
 
 const App = () => {
   return <QrCode codeText="123" />;
@@ -41,13 +24,18 @@ const App = () => {
 
 ## Component API
 
-> Based on [taro-qrcode](https://github.com/wukongyang/taro-qrcode)
+> Based on [taro-code-creator](https://github.com/wukongyang/taro-code-creator)
 
-|        Prop         |                Description                | Default | Platform |
-| :-----------------: | :---------------------------------------: | :-----: | :------: |
-|    **codeText**     |              QR code content              |         |   all    |
-|      **color**      |               QR code color               | `#000`  |   all    |
-| **backgroundColor** |         QR code background color          | `#fff`  |   all    |
-|      **size**       |               QR code size                |  `200`  |   all    |
-|    **logoSize**     |                 Logo size                 |  `60`   |   all    |
-|    **callback**     | Callback function for generating QR codes |         |   all    |
+|        Prop         |                Description                | Default | type |
+| :-----------------: | :---------------------------------------: | :-----: | :--: |
+|      **type**       |                 code type                 |  `qr`   | all  |
+|    **codeText**     |              QR code content              |         | all  |
+|      **color**      |               QR code color               | `#000`  | all  |
+| **backgroundColor** |         QR code background color          | `#fff`  | all  |
+|      **size**       |               QR code size                |  `200`  |  qr  |
+|      **logo**       |                 logo url                  |   ``    |  qr  |
+|    **logoSize**     |                 Logo size                 |  `60`   |  qr  |
+|    **callback**     | Callback function for generating QR codes |         | all  |
+|      **width**      |               barcode width               |         | bar  |
+|     **height**      |              barcode height               |         | bar  |
+|     **format**      |              barcode format               |         | bar  |
