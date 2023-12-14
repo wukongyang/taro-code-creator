@@ -1,6 +1,6 @@
 {
   "name": "taro-code-creator",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Code for taro,Supports generating barcodes and QR codes",
   "repository": "https://github.com/wukongyang/taro-code-creator",
   "author": "wukongyang",

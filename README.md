@@ -15,12 +15,23 @@ yarn add taro-code-creator
 ## Basic Usage
 
 ```tsx
-import QrCode from "taro-code-creator";
+import CodeCreator from "taro-code-creator";
 
 const App = () => {
-  return <QrCode codeText="123" />;
+  return (
+    <>
+      <CodeCreator
+        codeText="test"
+        size={420}
+        logo={defaultHeadSculpture}
+        logoSize={88}
+      />
+      <CodeCreator type="bar" width={400} height={100} codeText="test" />
+    </>
+  );
 };
 ```
+![img](./example.png)
 
 ## Component API
 
