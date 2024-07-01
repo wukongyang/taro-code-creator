@@ -16,6 +16,7 @@ import drawQrcode from "../../utils/qrcode";
  * <QrCode codeText={'test_text'} />
  */
 const QrCode: React.FC<ScanCodeProps> = ({
+  id = "custom_qrcode",
   size = 200,
   logo = "",
   logoSize = 60,
@@ -24,13 +25,12 @@ const QrCode: React.FC<ScanCodeProps> = ({
   color = "#000",
   backgroundColor = "#fff",
 }) => {
-
   useEffect(() => {
     const sizeNumber = parseFloat(Taro.pxTransform(size)) / 2;
     const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) / 2;
     const query = Taro.createSelectorQuery();
     query
-      .select("#custom_qrcode")
+      .select(`#${id}`)
       .fields({ node: true, size: true })
       .exec((res) => {
         const canvas = res[0].node;
@@ -40,7 +40,7 @@ const QrCode: React.FC<ScanCodeProps> = ({
         const options = {
           width: sizeNumber,
           height: sizeNumber,
-          canvasId: "custom_qrcode",
+          canvasId: id,
           text: codeText,
           foreground: color,
           background: backgroundColor,
@@ -79,8 +79,8 @@ const QrCode: React.FC<ScanCodeProps> = ({
   return (
     <Canvas
       style={{ width: Taro.pxTransform(size), height: Taro.pxTransform(size) }}
-      id='custom_qrcode'
-      type='2d'
+      id={id}
+      type="2d"
     ></Canvas>
   );
 };

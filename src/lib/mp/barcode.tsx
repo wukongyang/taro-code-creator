@@ -16,6 +16,7 @@ import drawBarcode from "../../utils/mp_barcode";
  * @example
  */
 const BarCode: React.FC<ScanCodeProps> = ({
+  id = "custom_barcode",
   codeText = "",
   color = "#000",
   backgroundColor = "#fff",
@@ -26,7 +27,7 @@ const BarCode: React.FC<ScanCodeProps> = ({
   useEffect(() => {
     const query = Taro.createSelectorQuery();
     query
-      .select("#custom_qrcode")
+      .select(`#${id}`)
       .fields({ node: true, size: true })
       .exec((res) => {
         const canvas = res[0].node;
@@ -35,14 +36,7 @@ const BarCode: React.FC<ScanCodeProps> = ({
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
         const ctx = canvas.getContext("2d");
-        drawBarcode(
-          ctx,
-          codeText,
-          canvasWidth,
-          canvasHeight,
-          color,
-          backgroundColor
-        );
+        drawBarcode(ctx, codeText, canvasWidth, canvasHeight, color, backgroundColor);
         Taro.nextTick(() => {
           Taro.canvasToTempFilePath({
             canvas,
@@ -59,8 +53,8 @@ const BarCode: React.FC<ScanCodeProps> = ({
         width: Taro.pxTransform(width),
         height: Taro.pxTransform(height),
       }}
-      id='custom_qrcode'
-      type='2d'
+      id={id}
+      type="2d"
     ></Canvas>
   );
 };

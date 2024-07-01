@@ -22,6 +22,11 @@ type BarcodeFormat =
   | "GenericBarcode";
 export type ScanCodeProps = QrCodeProps &
   BarCodeProps & {
+    /**
+     * ID 如需渲染多个码时，区分不同码的唯一标识
+     * @default '
+     */
+    id?: string;
     /**码内容*/
     codeText: string;
     /**
