@@ -4,11 +4,13 @@
  * @author wukongyang
  */
 
-import { Canvas } from "@tarojs/components";
-import React, { useEffect } from "react";
-import Taro from "@tarojs/taro";
-import { ScanCodeProps } from "../../index.type";
-import drawQrcode from "../../utils/qrcode";
+import { Canvas } from '@tarojs/components'
+import React, { useEffect, useRef } from 'react'
+import Taro from '@tarojs/taro'
+import { ScanCodeProps } from '../../index.type'
+import drawQrcode from '../../utils/qrcode'
+import { generateRandomId } from '../../utils/index'
+
 
 /**
  * @description 二维码组件
@@ -17,30 +19,30 @@ import drawQrcode from "../../utils/qrcode";
  */
 const QrCode: React.FC<ScanCodeProps> = ({
   size = 200,
-  logo = "",
+  logo = '',
   logoSize = 60,
-  codeText = "",
+  codeText = '',
   callback,
-  color = "#000",
-  backgroundColor = "#fff",
+  color = '#000',
+  backgroundColor = '#fff',
 }) => {
-
+  const randomId = useRef(`custom_code_${generateRandomId()}`)
   useEffect(() => {
-    const sizeNumber = parseFloat(Taro.pxTransform(size)) / 2;
-    const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) / 2;
-    const query = Taro.createSelectorQuery();
+    const sizeNumber = parseFloat(Taro.pxTransform(size)) / 2
+    const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) / 2
+    const query = Taro.createSelectorQuery()
     query
-      .select("#custom_qrcode")
+      .select(`#${randomId.current}`)
       .fields({ node: true, size: true })
       .exec((res) => {
-        const canvas = res[0].node;
-        canvas.width = sizeNumber;
-        canvas.height = sizeNumber;
-        const ctx = canvas.getContext("2d");
+        const canvas = res[0].node
+        canvas.width = sizeNumber
+        canvas.height = sizeNumber
+        const ctx = canvas.getContext('2d')
         const options = {
           width: sizeNumber,
           height: sizeNumber,
-          canvasId: "custom_qrcode",
+          canvasId: 'custom_qrcode',
           text: codeText,
           foreground: color,
           background: backgroundColor,
@@ -50,11 +52,11 @@ const QrCode: React.FC<ScanCodeProps> = ({
             Taro.canvasToTempFilePath({
               canvas,
               success: (r) => {
-                callback?.(r.tempFilePath);
+                callback?.(r.tempFilePath)
               },
-            });
+            })
           },
-        };
+        }
         if (logo) {
           Taro.getImageInfo({
             src: logo,
@@ -68,21 +70,21 @@ const QrCode: React.FC<ScanCodeProps> = ({
                   dWidth: logoSizeNumber,
                   dHeight: logoSizeNumber,
                 },
-              });
+              })
             },
-          });
+          })
         } else {
-          drawQrcode(options);
+          drawQrcode(options)
         }
-      });
-  }, []);
+      })
+  }, [])
   return (
     <Canvas
       style={{ width: Taro.pxTransform(size), height: Taro.pxTransform(size) }}
-      id='custom_qrcode'
-      type='2d'
+      id={randomId.current}
+      type="2d"
     ></Canvas>
-  );
-};
+  )
+}
 
-export default QrCode;
+export default QrCode
