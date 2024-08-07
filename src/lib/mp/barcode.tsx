@@ -5,12 +5,12 @@
  */
 
 import { Canvas } from '@tarojs/components'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import Taro from '@tarojs/taro'
 
 import { ScanCodeProps } from '../../index.type'
 import drawBarcode from '../../utils/mp_barcode'
-import { generateRandomId } from '../../utils/index'
+import { generateRandomId } from '../../utils/utils'
 
 /**
  * @description 条形码组件
@@ -24,11 +24,11 @@ const BarCode: React.FC<ScanCodeProps> = ({
   height = 100,
   callback,
 }) => {
-  const randomId = useRef(`custom_code_${generateRandomId()}`)
+  const randomId = `custom_code_${generateRandomId()}`
   useEffect(() => {
     const query = Taro.createSelectorQuery()
     query
-      .select(`#${randomId.current}`)
+      .select(`#${randomId}`)
       .fields({ node: true, size: true })
       .exec((res) => {
         const canvas = res[0].node
@@ -61,7 +61,7 @@ const BarCode: React.FC<ScanCodeProps> = ({
         width: Taro.pxTransform(width),
         height: Taro.pxTransform(height),
       }}
-      id={randomId.current}
+      id={randomId}
       type="2d"
     ></Canvas>
   )

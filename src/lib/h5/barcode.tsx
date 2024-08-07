@@ -10,7 +10,7 @@ import Taro from "@tarojs/taro";
 import JsBarcode from "jsbarcode";
 
 import { ScanCodeProps } from "../../index.type";
-import { generateRandomId } from '../../utils/index'
+import { generateRandomId } from '../../utils/utils'
 
 /**
  * @description 条形码组件

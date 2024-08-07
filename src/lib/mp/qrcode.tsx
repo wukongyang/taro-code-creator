@@ -5,12 +5,12 @@
  */
 
 import { Canvas } from '@tarojs/components'
-import React, { useEffect, useRef } from 'react'
+import { getSystemInfoSync } from '@tarojs/taro'
+import React, { useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { ScanCodeProps } from '../../index.type'
 import drawQrcode from '../../utils/qrcode'
-import { generateRandomId } from '../../utils/index'
-
+import { generateRandomId } from '../../utils/utils'
 
 /**
  * @description 二维码组件
@@ -26,13 +26,15 @@ const QrCode: React.FC<ScanCodeProps> = ({
   color = '#000',
   backgroundColor = '#fff',
 }) => {
-  const randomId = useRef(`custom_code_${generateRandomId()}`)
+  const randomId = `custom_qr_code_${generateRandomId()}`
   useEffect(() => {
-    const sizeNumber = parseFloat(Taro.pxTransform(size)) / 2
-    const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) / 2
+    const dpr = getSystemInfoSync().pixelRatio
+
+    const sizeNumber = parseFloat(Taro.pxTransform(size)) * dpr
+    const logoSizeNumber = parseFloat(Taro.pxTransform(logoSize)) * dpr
     const query = Taro.createSelectorQuery()
     query
-      .select(`#${randomId.current}`)
+      .select(`#${randomId}`)
       .fields({ node: true, size: true })
       .exec((res) => {
         const canvas = res[0].node
@@ -69,6 +71,7 @@ const QrCode: React.FC<ScanCodeProps> = ({
                   dy: sizeNumber / 2 - logoSizeNumber / 2,
                   dWidth: logoSizeNumber,
                   dHeight: logoSizeNumber,
+                  dpr,
                 },
               })
             },
@@ -81,7 +84,7 @@ const QrCode: React.FC<ScanCodeProps> = ({
   return (
     <Canvas
       style={{ width: Taro.pxTransform(size), height: Taro.pxTransform(size) }}
-      id={randomId.current}
+      id={randomId}
       type="2d"
     ></Canvas>
   )

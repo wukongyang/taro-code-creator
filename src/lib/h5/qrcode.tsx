@@ -10,7 +10,7 @@ import Taro from "@tarojs/taro";
 import QRCode from "qrcodejs2";
 
 import { ScanCodeProps } from "../../index.type";
-import { generateRandomId } from '../../utils/index'
+import { generateRandomId } from '../../utils/utils'
 
 /**
  * @description 二维码组件
